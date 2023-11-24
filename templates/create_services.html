@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Service</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+        <script>
+            function redirectToHome() {
+                console.log("before redirection");
+            window.location.href = '/';
+            console.log("after redirection");
+        }
+        </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Service</h2>
+        <form method="POST" action="/Create_service">
+            <div class="mb-3">
+                <label for="service_name" class="form-label">Service Name:</label>
+                <input type="text" class="form-control" id="service_name" name="service_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="service_details" class="form-label">Service Details:</label>
+                <input type="text" class="form-control" id="service_details" name="service_details" required>
+            </div>
+            <div class="mb-3">
+                <label for="service_price" class="form-label">Service Price:</label>
+                <input type="number" class="form-control" id="service_price" name="service_price" required>
+            </div>
+            <div class="mb-3">
+                <label for="service_tier_id" class="form-label">Service Tier ID:</label>
+                
+                <select name="service_tier_id">
+                    {% for row in data %}
+                        <option value={{row.member_tier_id}}> {{ row.member_tier_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="timeInput">Enter Service Duration:</label>
+                <input type="text" id="timeInput" name="timeInput" pattern="(?:[01]\d|2[0-3]):[0-5]\d" title="Enter a valid 24-hour time" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Service</button>
+            <button type="button" onclick="redirectToHome()" class="btn btn-primary">Home</button>
+        </form>
+    </div>
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

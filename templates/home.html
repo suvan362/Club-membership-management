@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Membership Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        header h1 {
+            text-align: center;
+            margin: 0;
+            padding-left: 10px;
+        }
+
+        header #admin {
+            float: left;
+            padding-left: 10px;
+        }
+
+        header #datetime {
+            float: right;
+            padding-right: 10px;
+        }
+
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            text-decoration: none;
+            background-color: #555;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        main {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span id="admin">Admin</span>
+        <h1>Club Membership Management System</h1>
+        <span id="datetime"></span>
+    </header>
+    <nav>
+        <a href="/Create_user">Create User</a>
+        <a href="/payment">Make Payment</a>
+        <a href="/view_payments">View Payments</a>
+        <a href="/view_members">View Members</a>
+        <a href="/Subscription">Manage Members</a>
+        <a href="/Current_date">Services Today</a>
+        <a href="/Create_service">Create Service</a>
+        <a href="/view_services">View Services</a>
+    </nav>
+    <main>
+        <!-- Your content goes here -->
+    </main>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const datetimeElement = document.getElementById("datetime");
+            datetimeElement.textContent = now.toLocaleString();
+        }
+
+        // Update date and time every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Call the function immediately to display the initial time
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 25%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            text-align: left;
+        }
+        label, select, input {
+            display: block;
+            margin: 10px 0;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        button{
+            width:100%;
+        background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+            <script>
+                function redirectToHome() {
+                    console.log("before redirection");
+                window.location.href = '/';
+                console.log("after redirection");
+            }
+            </script>
+            
+</head>
+<body>
+    <div class="container">
+        <script>
+            function getprice()
+            {
+                service={{service|safe}}
+                var price=service[document.getElementById("service").value]
+                document.getElementById("price").innerHTML="price: "+price
+                console.log(document.getElementById("service").value)
+            }
+              
+        </script>
+        <h1>Service Booking Form</h1>
+        <form action="/payment/submit" method="post">
+            <label for="member_id">Member ID:</label>
+            <input type="text" id="member_id" name="member_id" required>
+
+            <label for="service" >Select a Service:</label>
+            <select id="service" onchange="getprice()" name="service" required>
+                <option value="">--Please choose an option--</option>
+                {%for key in service%}
+                <option value='{{key}}''>{{key}}</option>
+                {%endfor%}
+                <!-- Add more service options here -->
+            </select>
+
+            <label for="booking_date">Booking Date:</label>
+            <input type="date" id="booking_date" name="booking_date" required>
+
+            <label for="booking_time">Booking Time:</label>
+            <input type="time" id="booking_time" name="booking_time" required>
+
+            <label for="payment_mode">Payment Mode:</label>
+            <select id="payment_mode" name="payment_mode" required>
+                <option value="credit_card">Credit Card</option>
+                <option value="debit_card">Debit Card</option>
+                <option value="UPI">UPI</option>
+                <!-- Add more payment options here -->
+            </select>
+            <label for="UPI_ID_Card_Number">UPI ID/ Card Number</label>
+            <input type="text" name="UPI_ID_Card_Number">
+            
+            <p id="price"></p>
+            <p>{{error}}</p>
+
+            <input type="submit" value="Book Service">
+            <button type="button" onclick="redirectToHome()" >Cancel</button>
+        </form>
+    </div>
+    <script>
+// Function to set the minimum date for the booking_date input
+function setMinDate() {
+    // Get the current date
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
+    // Format the date to match the input format (YYYY-MM-DD)
+    var formattedDate = currentDate.toISOString().slice(0, 10);
+
+    // Set the current date as the minimum allowed date
+    document.getElementById('booking_date').setAttribute('min', formattedDate);
+}
+
+// Call the function to set the minimum date when the page loads
+setMinDate();
+        </script>
+</body>
+</html>

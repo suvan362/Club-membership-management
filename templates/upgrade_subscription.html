@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subscription Payment Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 60%;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px #aaa;
+    }
+    .form-group {
+      margin: 10px 0;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+    .form-group input[type="text"],
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      outline: none;
+    }
+    .form-group input[type="text"][readonly],
+    .form-group input[type="datetime-local"][readonly] {
+      background-color: #f5f5f5;
+    }
+    .submit-button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Subscription Payment Form</h1>
+    <form action="/UpgradeSubscription" method="post">
+      <div class="form-group">
+        <label for="member_id">Member ID:</label>
+        <input type="text" name="member_id" id="member_id" readonly value="{{member_id}}"">
+      </div>
+      <div class="form-group">
+        <label for="member_name">Member Name:</label>
+        <input type="text" name="member_name" id="member_name" readonly value="{{full_name}}">
+      </div>
+      <div class="form-group">
+        <label for="tier_id">Select Subscription Tier:</label>
+        <select name="tier_id" id="tier">
+            {% for row in member_tier %}
+          <option value="{{row[0]~' '~row[1] }}">{{row[1]+" Rs." ~ row[3]}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="payment_type">Payment Type:</label>
+        <select name="payment_type" id="payment_type" required>
+          <option value="credit_card">Credit Card</option>
+          <option value="debit_card">Debit Card</option>
+          <option value="UPI">UPI</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="card_number">UPI ID /Card Number:</label>
+        <input type="text" name="card_number" id="card_number" required>
+      </div>
+      <div class="form-group">
+        <label for="end_date">Subscription End Date:</label>
+        <input type="datetime-local" name="end_date" id="subscription_end_date" readonly value="{{end_date}}">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="submit-button" value="Submit Payment">
+      </div>
+    </form>
+  </div>
+</body>
+</html>

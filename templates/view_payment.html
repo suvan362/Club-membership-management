@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button{
+            background-color: #3498db;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+        
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        p {
+            color: #3498db;
+            font-weight: bold;
+        }
+    </style>
+            <script>
+                function redirectToHome() {
+                    console.log("before redirection");
+                window.location.href = '/';
+                console.log("after redirection");
+            }
+            </script>
+</head>
+<body>
+    <h1>All Payments</h1>
+
+    <form method="post">
+        <label for="member_id">Filter by Member ID:</label>
+        <input type="text" name="member_id" id="member_id">
+        <input type="submit" value="Filter">
+        <button type="button" onclick="redirectToHome()" >Home</button>
+    </form>
+
+    {% if total_payment is not none %}
+        <p>Total Payment for Member ID {{ member_id }}: ₹{{ total_payment[0]['total_payment'] }}</p>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>Payment ID</th>
+            <th>Payment Type</th>
+            <th>Payment Date</th>
+            <th>UPI ID / Card Number</th>
+            <th>Service Request ID</th>
+            <th>Service Request Name</th>
+            <th>Service Request Time</th>
+            <th>Service Duration</th>
+            <th>Member ID</th>
+            <th>Payment Amount</th>
+            <th>Cancel Payment</th>
+            <!-- Add more headers as needed -->
+        </tr>
+        {% for payment in payments %}
+            <tr>
+                <td>{{ payment.payment_id }}</td>
+                <td>{{ payment.payment_type }}</td>
+                <td>{{ payment.payment_date }}</td>
+                <td>{{ payment.UPI_Id_Card_Number }}</td>
+                <td>{{ payment.service_request_id }}</td>
+                <td>{{ payment.service_request_name }}</td>
+                <td>{{ payment.service_request_time }}</td>
+                <td>{{ payment.service_duration }}</td>
+                <td>{{ payment.member_id }}</td>
+                <td>{{ payment.service_price}}</td>
+                <td>
+                <form method="POST" action="/cancel_payment">
+                    <input type="text" value={{payment.payment_id}} name="payment_id" hidden>
+                    <input type="submit" value="Cancel">
+                </form>
+            </td>
+                <!-- Add more cells as needed -->
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

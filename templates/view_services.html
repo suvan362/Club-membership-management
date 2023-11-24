@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function redirectToHome() {
+            console.log("before redirection");
+        window.location.href = '/';
+        console.log("after redirection");
+    }
+    </script>
+</head>
+<body>
+    <h2>View Services</h2>
+    <button type="button" onclick="redirectToHome()">Home</button>
+    <table>
+        <tr>
+            <th>Service Name</th>
+            <th>Service Details</th>
+            <th>Service Price</th>
+            <th>Service Duration</th>
+            <th>Service Tier</th>
+            <th>delete</th>
+        </tr>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.service_name }}</td>
+                <td>{{ service.service_details }}</td>
+                <td>{{ service.service_price }}</td>
+                <td>{{ service.service_duration }}</td>
+                <td>{{ service.member_tier_name }}</td>
+                <td> <form action="/view_services" method="post">
+                    <input type="text" value="{{service.service_id}}" name="service_id" hidden>
+                    <input type="submit" value="Delete">
+                </form></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
