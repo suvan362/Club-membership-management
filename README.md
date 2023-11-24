@@ -17,4 +17,5 @@ Key Functionalities:
    - Manage members' subscriptions by capturing subscription ID, validity, and duration.
    - Ensure timely payments for membership subscriptions.
    - Streamline the overall subscription management process.
+     
 The project aims to create a database-driven system that not only simplifies administrative tasks related to club management but also enhances the overall efficiency of the club's operations. By incorporating these key functionalities, the system provides a robust and user-friendly platform for managing memberships, services, and payments, ultimately contributing to a seamless and organized club experience for both members and administrators.
