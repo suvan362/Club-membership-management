@@ -1,5 +1,6 @@
 # Club-membership-management
 Club Membership Management DBMS Mini Project 
+
 This Database Management System (DBMS) project addresses the efficient and systematic organization of club memberships within a real-world club, aiming to streamline administrative tasks and enhance the overall member experience. The project encompasses a comprehensive solution for managing key aspects of club operations, focusing on membership management, service provision, and payment processing. Through a user-friendly interface, the system enables club management to seamlessly handle memberships, services, and payments.
 Key Functionalities:
 1. Members Management:
